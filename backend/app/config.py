@@ -21,6 +21,16 @@ class Settings(BaseSettings):
             url = self.DATABASE_URL.replace("postgres://", "postgresql+asyncpg://")
             if "postgresql+asyncpg://" not in url:
                 url = url.replace("postgresql://", "postgresql+asyncpg://")
+            
+            # If the port is missing (common in some internal Render URLs), append default :5432
+            # We look for the hostname part (after @ and before /) and check for :
+            try:
+                parts = url.split("@")[1].split("/")[0]
+                if ":" not in parts:
+                    url = url.replace(parts, f"{parts}:5432")
+            except (IndexError, AttributeError):
+                pass
+                
             return url
         
         if os.getenv("USE_SQLITE", "true") == "true":
