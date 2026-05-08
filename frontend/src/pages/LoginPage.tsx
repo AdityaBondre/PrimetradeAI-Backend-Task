@@ -26,8 +26,7 @@ const LoginPage = () => {
       });
       const userProfile = profileResponse.data.data;
       
-      localStorage.setItem('user_profile', JSON.stringify(userProfile));
-      login(access_token, refresh_token);
+      login(access_token, refresh_token, userProfile);
       
       navigate('/dashboard');
     } catch (err: any) {

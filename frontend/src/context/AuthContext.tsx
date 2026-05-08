@@ -11,7 +11,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (accessToken: string, refreshToken: string) => void;
+  login: (accessToken: string, refreshToken: string, userData: User) => void;
   logout: () => void;
 }
 
@@ -39,12 +39,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(false);
   }, []);
 
-  const login = (accessToken: string, refreshToken: string) => {
+  const login = (accessToken: string, refreshToken: string, userData: User) => {
     localStorage.setItem('access_token', accessToken);
     localStorage.setItem('refresh_token', refreshToken);
-    jwtDecode(accessToken);
-    // Ideally fetch profile here, but for now we'll set a placeholder
-    // The profile will be fetched in the Dashboard or via a custom hook
+    localStorage.setItem('user_profile', JSON.stringify(userData));
+    setUser(userData);
   };
 
   const logout = () => {
