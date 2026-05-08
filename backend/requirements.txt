@@ -11,3 +11,5 @@ slowapi
 python-multipart
 httpx
 python-dotenv
+bcrypt
+aiosqlite

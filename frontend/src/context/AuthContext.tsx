@@ -25,7 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const token = localStorage.getItem('access_token');
     if (token) {
       try {
-        const decoded: any = jwtDecode(token);
+        jwtDecode(token);
         // In a real app, you'd fetch the user profile from /me
         // For now, we'll just use the ID from the token and assume other info is fetched or stored
         const storedUser = localStorage.getItem('user_profile');
@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = (accessToken: string, refreshToken: string) => {
     localStorage.setItem('access_token', accessToken);
     localStorage.setItem('refresh_token', refreshToken);
-    const decoded: any = jwtDecode(accessToken);
+    jwtDecode(accessToken);
     // Ideally fetch profile here, but for now we'll set a placeholder
     // The profile will be fetched in the Dashboard or via a custom hook
   };
