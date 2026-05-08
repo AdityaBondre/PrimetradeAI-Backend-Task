@@ -26,10 +26,10 @@ Run the following command in the project root:
 docker-compose up --build
 ```
 
-The system will be available at:
-- **Frontend**: [http://localhost:3000](http://localhost:3000)
-- **Backend API**: [http://localhost:8000](http://localhost:8000)
-- **Swagger Docs**: [http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/docs)
+The system is available at:
+- **Live Frontend**: [https://primetrade-ai-backend-task-lq9o.onrender.com](https://primetrade-ai-backend-task-lq9o.onrender.com)
+- **Live Backend API**: [https://primetradeai-backend-task.onrender.com](https://primetradeai-backend-task.onrender.com)
+- **Interactive Swagger Docs**: [https://primetradeai-backend-task.onrender.com/api/v1/docs](https://primetradeai-backend-task.onrender.com/api/v1/docs)
 
 ### Local Development (without Docker)
 1. **Backend**:

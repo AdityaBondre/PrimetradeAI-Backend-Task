@@ -17,9 +17,15 @@ class Settings(BaseSettings):
     @property
     def ASYNC_DATABASE_URL(self) -> str:
         if self.DATABASE_URL:
-            return self.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
+            # Render/Heroku often use postgres://, but SQLAlchemy/asyncpg needs postgresql+asyncpg://
+            url = self.DATABASE_URL.replace("postgres://", "postgresql+asyncpg://")
+            if "postgresql+asyncpg://" not in url:
+                url = url.replace("postgresql://", "postgresql+asyncpg://")
+            return url
+        
         if os.getenv("USE_SQLITE", "true") == "true":
             return f"sqlite+aiosqlite:///./{self.SQLITE_DB}"
+            
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"
 
     # Security
